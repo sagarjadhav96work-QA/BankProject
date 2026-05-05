@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite">
+  <test thread-count="5" name="AddpayeeorbeneficiaryTest">
+    <classes>
+      <class name="com.automation.bankms.qa.webtestcases.AddPayeeorBeneficiaryTest">
+      <methods>
+      <include name="TC081_addnewpayeewithcorrectdetailstest"/>
+      <include name="TC082_addnewpayeewithnodetailsininputfieldtest"/>
+      <include name="TC083_verifypagerefreshbehaviourafteraddingalldetailsinaddpayeepagetest"/>
+      <include name="TC084_addnewpayeewithincorrectdetailstest"/>
+      <include name="TC106_verifyaddpayeeSQLinjectiontest"/>
+      </methods>
+      
+      </class>
+      
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

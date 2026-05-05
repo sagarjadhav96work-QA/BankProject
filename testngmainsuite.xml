@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite">
+<listeners>
+<listener class-name="com.automation.bankms.qa.listeners.TestListener"/>
+</listeners>
+  <test thread-count="5" name="Test">
+    <classes>
+      
+      <class name="com.automation.bankms.qa.webtestcases.user.LoginPageTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.DashboardPageTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.TransactionReportTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.TransactionHistoryPageTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.TransferAmountPageTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.ManagePayeeorBeneficiaryTest"/>
+      <class name="com.automation.bankms.qa.webtestcases.user.UserProfileUpdateTest"/>      
+      <class name="com.automation.bankms.qa.webtestcases.user.ForgotPasswordPageTest"/>
+     
+      
+      
+      
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

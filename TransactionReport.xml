@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite3">
+<listeners>
+<listener class-name="com.automation.bankms.qa.listeners.TestListener"/>
+</listeners>
+    <test name="Test">
+        <classes>
+            <class name="com.automation.bankms.qa.webtestcases.TransactionReportTest">
+            <methods>
+         
+            
+            </methods>
+            </class>
+            
+        </classes>
+    </test>
+</suite>

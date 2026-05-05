@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="CashierLoginSuite">
+<listeners>
+<listener class-name="com.automation.bankms.qa.listeners.TestListener"/>
+</listeners>
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.automation.bankms.qa.webtestcases.cashier.CashierLoginPageTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite1">
+<listeners>
+<listener class-name="com.automation.bankms.qa.listeners.TestListener"/>
+</listeners>
+    <test name="Test">
+        <classes>
+            <class name="com.automation.bankms.qa.webtestcases.UserAccountOpeningTest">
+            <methods>
+           
+            
+            
+            <include name="TC051_verifyuserisunabletocreatenewuseraccountwithallfieldsempty"/>
+            <include name="TC052_verifyuserisunabletosubmitopeningrequestwithunsupportedformatinpancardproofield" />
+            <include name="TC075_verifypagerefreshafterfillingalldetails"/>
+            </methods>
+            </class>
+            
+        </classes>
+    </test>
+</suite>
