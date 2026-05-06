@@ -103,6 +103,11 @@ public class Useraccountopeningpage {
 	{
 	    return accountdetailstitle.getText();	
 	}
+
+	public void getNameofSagar()
+	{
+	}
+		
 	
 	
 }
