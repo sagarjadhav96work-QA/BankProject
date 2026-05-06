@@ -607,11 +607,10 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		}
 		soft.assertAll();
 	}
-	@Test(priority=22)
-	public void NewlyaddedTestCase()
-	{
-		System.Out.Println("This is the newly added Test Case");
-	}
+	
+	
+	
+	
 	@AfterMethod
 	public void Teardown(Method method)
 	{
