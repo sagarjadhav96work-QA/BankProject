@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.automation.bankms.qa.webtestcases.cashier.CashierSearchAccountHolderPageTest">
+      <class name="com.automation.bankms.qa.webtestcases.cashier.CashierForgotPasswordPageTest">
         <methods>
-          <include name="TC336_VerifyTrimmingofInputTest"/>
           <include name="Setup"/>
-          <include name="Teardown"/>
+          <include name="TC374_verifyNavigationandLoadingofForgotPasswordPageTest"/>
+          <include name="TearDown"/>
         </methods>
-      </class> <!-- com.automation.bankms.qa.webtestcases.cashier.CashierSearchAccountHolderPageTest -->
+      </class> <!-- com.automation.bankms.qa.webtestcases.cashier.CashierForgotPasswordPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

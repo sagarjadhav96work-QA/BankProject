@@ -480,9 +480,13 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Clicking on Homepage Link");
 		clp.clickOnHomepagelink();
 		hp=new Homepage(driver);
-		hp.checkNewuserLinkisClickable();
-		hp.checkCashierLinkisClickable();
-		hp.checkAdminLinkisClickable();
+		log.info("Checking New User Link is Clickable");
+		soft.assertTrue(hp.checkNewuserLinkisClickable(), "New User Link is Not Clickable");
+		log.info("Checking Cashier Link is Clickable");
+		soft.assertTrue(hp.checkCashierLinkisClickable(), "Cashier Link is Not Clickable");
+		log.info("Checking Admin Link is Clickable");
+		soft.assertTrue(hp.checkAdminLinkisClickable(), "Admin Link is Not Clickable");
+		
 		log.info("Checking application title displayed on Homepage");
 		soft.assertEquals(hp.getTitleofHomepage(),"e-Banking System","Application Title not displayed on Homepage");
 		log.info("HomePage Navigation is successfull");
