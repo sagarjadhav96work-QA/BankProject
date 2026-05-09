@@ -1,0 +1,25 @@
+# Maven target folder
+target/
+
+# TestNG reports
+test-output/
+
+# Logs
+logs/
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# IntelliJ
+.idea/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Zip/Gzip logs
+*.gz
