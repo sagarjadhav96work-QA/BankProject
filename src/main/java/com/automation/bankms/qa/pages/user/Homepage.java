@@ -58,38 +58,64 @@ public class Homepage  {
     	return driver.findElement(applicationtitle).getText();
     }
     
-    public void checkNewuserLinkisClickable()
+    public boolean checkNewuserLinkisClickable()
     {
+    	try {
     	log.info("Checking New User Link is Visible");
     	wait.waitforElementToBeVisible(newuserlink1);
     	log.info("New User Link is Visible");
     	log.info("Checking New User Link is Clickable");
     	wait.waitforElementToBeClickable(newuserlink1);
     	log.info("New User Link is Clickable");
+    	return true;
+    	}
+    	catch(Exception E)
+    	{
+    		log.info("The Exception is {}",E.getMessage());
+    		return false;
+    	}
     	
     }
     
-    public void checkCashierLinkisClickable()
+    public boolean checkCashierLinkisClickable()
     {
+    	try {
     	log.info("Checking Cashier Link is Visible");
     	wait.waitforElementToBeVisible(cashierloginlink1);
     	log.info("Cashier link is Visible");
     	log.info("Checking Cashier Link is Clickable");
     	wait.waitforElementToBeClickable(cashierloginlink1);
     	log.info("Cashier Link is Clickable");
+    	return true;
+    	}
+    	catch(Exception E)
+    	{
+    		log.info("The Exception is {}",E.getMessage());
+    		return false;
+    	}
     	
     }
     
-    public void checkAdminLinkisClickable()
+    public boolean checkAdminLinkisClickable()
     {
+    	try {
     	log.info("Checking Admin Link is Visible");
     	wait.waitforElementToBeVisible(adminloginlink1);
     	log.info(" Admin Link is Visible");
     	log.info("Checking Admin Link is Clickable");
     	wait.waitforElementToBeClickable(adminloginlink1);
     	log.info("Admin Link is Clickable");
+    	return true;
+        }
+    	catch(Exception E)
+    	{
+    		log.info("The Exception is {}",E.getMessage());
+    		return false;
+    	}
     	
     }
+    
+ 
 	
 	
 	
