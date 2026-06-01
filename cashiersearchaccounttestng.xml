@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="cashiersearchaccount">
+  <test thread-count="2" name="Test1">  
+   <parameter name="browsername" value="edge" />
+  
+    <classes>
+      <class name="com.automation.bankms.qa.webtestcases.cashier.CashierSearchAccountHolderPageTest">
+      <methods>
+      <include name="TC315_verifySearchUsingValidAccountHolderNameTest" />
+      <include name="TC316_verifyPartialNameSearchTest" />
+      
+      </methods>
+      
+      
+      
+      </class>
+    
+    
+    </classes>
+ 
+ 
+ 
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="classes">
+
+  <test thread-count="2" name="CashierSearchAccountTest">
+  <parameter name="OS" value="windows"/>
+   <parameter name="Browser" value="chrome"/>
+    <classes>
+      <class name="com.automation.bankms.qa.webtestcases.cashier.CashierSearchAccountHolderPageTest"/>
+      <methods>
+       <include name="TC320_verifyStatusBadgeValuesTest"/>
+       <include name="TC321_verifyViewButtonFunctionalityTest"/>
+      </methods>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
