@@ -1,20 +1,23 @@
 package com.automation.bankms.qa.base;
 
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 	
 	
-	public WebDriver driver;
+	
 	public WaitUtils ut;
 	protected static final Logger log=LogManagerUtil.getLogger(TestBase.class);
 	
@@ -22,36 +25,42 @@ public class TestBase {
 	public void Initialization() 
 	{
 		log.info("Launching Browser");
+	    
+	
 		String browsername=ConfigReader.getProperty("Browser");
 		
+	
 		if(browsername.equals("chrome"))
 		{
-			
-			driver=new ChromeDriver();
+			WebDriverManager.chromedriver().setup();
+			DriverManager.setDriver(new ChromeDriver());
 		}
 		else if(browsername.equals("edge"))
 		{
-			
-			driver=new EdgeDriver();
+			System.setProperty("webdriver.edge.driver","C:\\Drivers\\edgedriver\\msedgedriver.exe");//this changes are done as out test cases where not running in edge browser due to
+			//edge was not downloaded by selenium,so we manually downloaded it stored in above path and informed selenium about it using system.setproperty()
+			DriverManager.setDriver(new EdgeDriver());
 		}
 		else if(browsername.equals("firefox"))
 		{
-			
-			driver=new FirefoxDriver();
+			WebDriverManager.firefoxdriver().setup();
+			DriverManager.setDriver(new FirefoxDriver());
 		}
 		else
 		{
 			 System.out.println("Invalid Browser Name");
 		}
 		
-		log.info("Maximizing window");
-		driver.manage().window().maximize();
-		log.info("deleting all cookies");
-		driver.manage().deleteAllCookies();
-		log.info("launching URL");
-		driver.get(ConfigReader.getProperty("URL"));
+	    
 		
-		ut=new WaitUtils(driver, 20000);
+		log.info("Maximizing window");
+		DriverManager.getDriver().manage().window().maximize();
+		log.info("deleting all cookies");
+		DriverManager.getDriver().manage().deleteAllCookies();
+		log.info("launching URL");
+		DriverManager.getDriver().get(ConfigReader.getProperty("URL"));
+		
+		ut=new WaitUtils(DriverManager.getDriver(), 20000);
 		
 		ut.waitForElementToDisappear(By.id("overlayer"));
 		
@@ -60,6 +69,15 @@ public class TestBase {
 	
 		
 		
+	}
+	
+	public void tearDown()
+	{
+		if(DriverManager.getDriver()!=null)
+		{
+			DriverManager.getDriver().quit();
+			DriverManager.unload();
+		}
 	}
 
 }

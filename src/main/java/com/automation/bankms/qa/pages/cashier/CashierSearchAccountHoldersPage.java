@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.testng.asserts.SoftAssert;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
 
@@ -42,9 +43,9 @@ public class CashierSearchAccountHoldersPage {
 	SoftAssert soft;
 	protected static final Logger log=LogManagerUtil.getLogger(CashierSearchAccountHoldersPage.class);
 	
-	public CashierSearchAccountHoldersPage(WebDriver driver)
+	public CashierSearchAccountHoldersPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);
 		soft=new SoftAssert();
 		

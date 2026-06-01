@@ -14,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.cashier.CashierDashboardPage;
 import com.automation.bankms.qa.pages.cashier.CashierForgotPasswordPage;
 import com.automation.bankms.qa.pages.cashier.CashierLoginPage;
@@ -38,13 +39,13 @@ public class CashierForgotPasswordPageTest extends TestBase {
 	{
 		log.info("========= STARTING TEST: {} =========", method.getName());
 		Initialization();
-		context.setAttribute("driver", driver);
+		context.setAttribute("driver", DriverManager.getDriver());
 		log.info("Initializing Wait Utils");
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		log.info("Initializing Soft Asssert");
 		soft=new SoftAssert();
 		log.info("Initializing Home Page");
-		hp=new Homepage(driver);
+		hp=new Homepage();
 		log.info("Checking New User Link is Clickable");
 		soft.assertTrue(hp.checkNewuserLinkisClickable(), "New User Link is Not Clickable");
 		log.info("Checking Cashier Link is Clickable");
@@ -54,7 +55,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Cashier Login Link");
 		hp.clickoncashierloginlink();
 		log.info("Navigating to Cashier Login Page");
-		clp=new CashierLoginPage(driver);
+		clp=new CashierLoginPage();
 		log.info("Waiting for Visibility of Elements on Cashier Login Page");
 		clp.waitForVisibilityofCashierLoginPage();
 		log.info("Sucessfully Navigated to Cashier Login Page");
@@ -70,7 +71,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -93,7 +94,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Your Password succesfully changed","TC 352 Failed,Password Reset With Valid Details Failed");
 		     alt.accept();
@@ -108,7 +109,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -129,7 +130,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		    Alert alt = driver.switchTo().alert();
+		    Alert alt = DriverManager.getDriver().switchTo().alert();
 		    alt.accept();
 		     Assert.fail("TC 353 Failed,Password Resetted With Email Address Field Empty");
 		     
@@ -150,7 +151,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -173,7 +174,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 354 Failed,Password Resetted With Invalid Email Address Format");
 		     
@@ -194,7 +195,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -215,7 +216,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 355 Failed,Password Resetted With Mobile Number Field Empty");
 		    
@@ -236,7 +237,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -259,7 +260,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 356 Failed,Password Resetted With Invalid Mobile Number Format");
 		     
@@ -280,7 +281,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -303,7 +304,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			 log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Email id or Mobile no is invalid","TC 357 Failed,Password Resetted With Invalid Email Address");
 		     alt.accept();
@@ -324,7 +325,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -347,7 +348,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Email id or Mobile no is invalid","TC 358 Failed,Password Resetted With Invalid Mobile Number");
 		     alt.accept();
@@ -368,7 +369,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -391,7 +392,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"New Password and Confirm Password Field do not match  !!","TC 359 Failed,Password Resetted With Different Passwords in Confirm and New Password Fields");
 		     alt.accept();
@@ -412,7 +413,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -433,7 +434,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 360 Failed,Password Resetted With New Password Field Empty");
 		     alt.accept();
@@ -453,7 +454,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -474,7 +475,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 361 Failed,Password Resetted With Confirm Password Field Empty");
 		     alt.accept();
@@ -494,7 +495,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -518,7 +519,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Your Password succesfully changed","Password Reset With Leading or Trailing Spaces in Password field Failed");
 		     alt.accept();
@@ -543,14 +544,14 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(clp.checkalertispresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertFalse(alerttext.contains("Invalid Details"),"TC 362 Failed,Cashier Login Failed,Password Not Auto Trimmed ");
 		     alt.accept();
 		}
 		else
 		{
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String titleofdashboardpage = cdp.getTitleofDashboardPage();
 		soft.assertEquals(titleofdashboardpage, "Dashboard","TC 362 Failed,Cashier Login Failed,Password Not Auto Trimmed ");
 		}
@@ -566,7 +567,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -589,7 +590,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Your Password succesfully changed","TC 363 Failed,Password Reset With Long Input Failed");
 		     alt.accept();
@@ -604,7 +605,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -627,7 +628,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     String alerttext = alt.getText();
 		     soft.assertEquals(alerttext,"Your Password succesfully changed","TC 364 Failed,Password Reset With Special Characters Failed");
 		     alt.accept();
@@ -642,7 +643,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -665,7 +666,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 367 Failed,Password Resetted With SQL injection In Email Address Field");
 		     
@@ -686,7 +687,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -709,7 +710,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		     Assert.fail("TC 368 Failed,Password Resetted With SQL injection In Mobile Number Field");
 		     
@@ -730,7 +731,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -760,7 +761,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -793,7 +794,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
 		log.info("Navigating to Forgot Password Page");
-		cfpp=new CashierForgotPasswordPage(driver);
+		cfpp=new CashierForgotPasswordPage();
 		String forgotpasswordpagetitle = cfpp.getTitleofForgotPasswordPage();
 		soft.assertEquals(forgotpasswordpagetitle, "Forgot Password!","Forgot Password tile not Present");
 		log.info("Checking Input Fields are Enabled");
@@ -816,7 +817,7 @@ public class CashierForgotPasswordPageTest extends TestBase {
 		if(cfpp.checkAlertisPresent()==true)
 		{
 			log.info("Switching to Alert");
-		     Alert alt = driver.switchTo().alert();
+		     Alert alt = DriverManager.getDriver().switchTo().alert();
 		     alt.accept();
 		}
 	}
@@ -826,8 +827,9 @@ public class CashierForgotPasswordPageTest extends TestBase {
 	@AfterMethod
 	public void TearDown(Method method)
 	{
-		log.info("Browser Closed");	
-		driver.quit();
+		log.info("Browser Closed");
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		log.info("========= ENDING TEST: {} =========", method.getName());
 	}
 

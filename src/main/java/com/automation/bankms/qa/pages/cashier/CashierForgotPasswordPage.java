@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Forgotpasswordpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.utils.LogManagerUtil;
@@ -30,9 +31,9 @@ public class CashierForgotPasswordPage {
 	
 	
 	
-	public CashierForgotPasswordPage(WebDriver driver)
+	public CashierForgotPasswordPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);;
 	}
 	
@@ -92,21 +93,21 @@ public class CashierForgotPasswordPage {
 	{
 		log.info("Clicking on Reset Button");
 		driver.findElement(resetbutton).click();
-		return new Forgotpasswordpage(driver);
+		return new Forgotpasswordpage();
 	}
 	
 	public Forgotpasswordpage clickonForgotPasswordLink()
 	{
 		log.info("Clicking on Forgot Password Link");
 		driver.findElement(forgotpasswordlink).click();
-		return new Forgotpasswordpage(driver);
+		return new Forgotpasswordpage();
 	}
 	
 	public Homepage clickonBackToHomePageLink()
 	{
 		log.info("Clicking on Back to Homepage Link");
 		driver.findElement(backtohomepagelink).click();
-		return new Homepage(driver);
+		return new Homepage();
 	}
 	
 	public boolean checkAlertisPresent()

@@ -13,6 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.cashier.CashierDashboardPage;
 import com.automation.bankms.qa.pages.cashier.CashierForgotPasswordPage;
 import com.automation.bankms.qa.pages.cashier.CashierLoginPage;
@@ -30,19 +31,21 @@ public class CashierLoginPageTest extends TestBase{
 	 protected static final Logger log=LogManagerUtil.getLogger(CashierLoginPageTest.class);
 	public SoftAssert soft;
 	public WaitUtils wait;
-	@BeforeMethod
+	
+	@BeforeMethod()
+	
 	public void Setup(Method method,ITestContext context)
 	{
 		log.info("========= STARTING TEST: {} =========", method.getName());
 		Initialization();
 		soft=new SoftAssert();
-		wait=new WaitUtils(driver, 20000);
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
 		log.info("Clicking on Cashier Login Page");
 		hp.clickoncashierloginlink();
 		log.info("Navigating to Cashier Login Page");
-		clp=new CashierLoginPage(driver);
+		clp=new CashierLoginPage();
 		clp.waitForVisibilityofCashierLoginPage();
 		log.info("Navigated to Cashier Login Page");
 		
@@ -57,7 +60,7 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Password Entered");
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page");
 		Assert.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 248 Failed,Cashier Login with Valid Credentials Failed");
@@ -81,7 +84,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 249 Failed,Alert Text is not matching,Cashier Login was successfull with invalid credentials");
@@ -91,7 +94,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page");
 			soft.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 249 Failed,Cashier Login was successfull with invalid credentials");
@@ -120,7 +123,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 250 Failed,Alert Text is not matching,Cashier Login was successfull with invalid Password");
@@ -130,7 +133,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page");
 			soft.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 250 Failed,Cashier Login was successfull with invalid Password");
@@ -194,7 +197,7 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Password Entered");
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		Assert.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 253 Failed,Cashier Login with Minimum Input Character in Employee Id Failed");
@@ -219,7 +222,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			soft.assertEquals(alertconfirmationtext,"Employee Id should be less than 10 or equal to 10 characters");
 			alt.accept();
@@ -227,7 +230,7 @@ public class CashierLoginPageTest extends TestBase{
 		}
 		else
 		{
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		soft.fail("TC254 Failed: Login succeeded with invalid Employee ID (>10 chars)");
@@ -248,7 +251,7 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Password Entered with minimum input character");
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		Assert.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 255 Failed,Cashier Login with Minimum Input Character in Password field Failed");
@@ -273,7 +276,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			soft.assertEquals(alertconfirmationtext,"Password should be less than 10 or equal to 10 characters");
 			alt.accept();
@@ -281,7 +284,7 @@ public class CashierLoginPageTest extends TestBase{
 		}
 		else
 		{
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		soft.fail("TC256 Failed: Login succeeded with invalid Password (>10 chars)");
@@ -306,7 +309,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			soft.assertEquals(alertconfirmationtext,"Unsupported Format");
 			alt.accept();
@@ -314,7 +317,7 @@ public class CashierLoginPageTest extends TestBase{
 		}
 		else
 		{
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		soft.fail("TC257 Failed: Login succeeded with Special Characters in Employee Id Field");
@@ -336,7 +339,7 @@ public class CashierLoginPageTest extends TestBase{
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
 		
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 		log.info("extracted title text from dashboard Page==> {}",dashboardpageconfirmationtext);
 		Assert.assertEquals(dashboardpageconfirmationtext, "Dashboard","TC 258 Failed,Cashier Login Failed with Special Characters in Password Field");
@@ -363,7 +366,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 259 Failed,Alert Text is not matching,Cashier Login was successfull with LowerCase Employee Id Value");
@@ -373,7 +376,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page ==> {}",dashboardpageconfirmationtext);
 			soft.fail("TC 259 Failed,Cashier Login was successfull with LowerCase Employee Id Value");
@@ -404,7 +407,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 260 Failed,Alert Text is not matching,Cashier Login was successfull with LowerCase Password Value");
@@ -414,7 +417,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page ==> {}",dashboardpageconfirmationtext);
 			soft.fail("TC 259 Failed,Cashier Login was successfull with LowerCase Value");
@@ -453,7 +456,7 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Checking navigation and working of Forgot Password Link");
 		log.info("Clicking on Forgot Password Link");
 		clp.clickOnForgotPasswordLink();
-		fp=new CashierForgotPasswordPage(driver);
+		fp=new CashierForgotPasswordPage();
 		soft.assertTrue(fp.checkEmailAddressInputFieldIsEnabled(),"Email Address Field is not Enabled");
 		log.info("Email Address Field is Enabled");
 		soft.assertTrue(fp.checkMobileNumberInputFieldIsEnabled(),"Mobile Number Field is not Enabled");
@@ -479,7 +482,7 @@ public class CashierLoginPageTest extends TestBase{
 		log.info("Checking navigation and working of Homepage Link");
 		log.info("Clicking on Homepage Link");
 		clp.clickOnHomepagelink();
-		hp=new Homepage(driver);
+		hp=new Homepage();
 		log.info("Checking New User Link is Clickable");
 		soft.assertTrue(hp.checkNewuserLinkisClickable(), "New User Link is Not Clickable");
 		log.info("Checking Cashier Link is Clickable");
@@ -509,7 +512,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 264 Failed,Alert Text is not matching,Cashier Login was successfull with SQL injection attempt in Employee ID field");
@@ -519,7 +522,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page");
 			soft.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 264 Failed,Cashier Login was successfull with SQL injection attempt in Employee ID field");
@@ -545,7 +548,7 @@ public class CashierLoginPageTest extends TestBase{
 		{
 			log.info("Presence of Alert is confirmed");
 			log.info("Switching focus to alert");
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertconfirmationtext = alt.getText();
 			log.info("extracted text from alert : {}",alertconfirmationtext);
 			soft.assertEquals(alertconfirmationtext,"Invalid Details","TC 265 Failed,Alert Text is not matching,Cashier Login was successfull with SQL injection attempt in Password field");
@@ -555,7 +558,7 @@ public class CashierLoginPageTest extends TestBase{
 		else
 		{
 			
-			cdp=new CashierDashboardPage(driver);
+			cdp=new CashierDashboardPage();
 			String dashboardpageconfirmationtext = cdp.getTitleofDashboardPage();
 			log.info("extracted title text from dashboard Page");
 			soft.assertEquals(dashboardpageconfirmationtext,"Dashboard","TC 265 Failed,Cashier Login was successfull with SQL injection attempt in Password field");
@@ -570,11 +573,12 @@ public class CashierLoginPageTest extends TestBase{
 	
 	
 	
-	@AfterMethod
+	@AfterMethod()
 	public void Teardown(Method method)
 	{
 		log.info("Browser Closed");
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		log.info("========= ENDING TEST: {} =========", method.getName());
 	}
 	

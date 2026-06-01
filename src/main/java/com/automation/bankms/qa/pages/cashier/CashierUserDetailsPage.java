@@ -1,9 +1,12 @@
 package com.automation.bankms.qa.pages.cashier;
 
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
 
@@ -17,9 +20,9 @@ public class CashierUserDetailsPage {
 	WaitUtils wait;
 	protected static final Logger log=LogManagerUtil.getLogger(CashierUserDetailsPage.class);
 	
-	public CashierUserDetailsPage(WebDriver driver)
+	public CashierUserDetailsPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);
 		
 	}

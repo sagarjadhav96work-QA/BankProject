@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class Registrationpage {
 	
 	@FindBy(id="fname")private WebElement firstnameinputfield;
@@ -18,9 +20,9 @@ public class Registrationpage {
 	@FindBy(xpath = "//h1[text()='e-Banking | User Create an Account!']")private WebElement registrationpagetitle;
 	
 	WebDriver driver;
-	public Registrationpage(WebDriver driver)
+	public Registrationpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -38,13 +40,13 @@ public class Registrationpage {
 	public Homepage clickonbacktohomelink()
 	{
 		backtohomelink.click();
-		return new Homepage(driver);
+		return new Homepage();
 	}
 	
 	public Loginpage clickonalreadyhaveanaccountlink()
 	{
 		alreadyhaveanaccountlink.click();
-		return new Loginpage(driver);
+		return new Loginpage();
 	}
 	
 	public String checkworkingofregistrationpage()

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class TransferAmountpage {
 
 	@FindBy(xpath="//h3[text()='Transfer Amount']")private WebElement Transferamountpagetitle;
@@ -14,9 +16,9 @@ public class TransferAmountpage {
 	
 	WebDriver driver;
 	
-	public TransferAmountpage(WebDriver driver)
+	public TransferAmountpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 	}
 	

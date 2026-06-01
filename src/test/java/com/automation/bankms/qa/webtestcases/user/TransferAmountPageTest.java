@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -30,13 +31,13 @@ public class TransferAmountPageTest extends TestBase{
 	public void Setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
-		dp=new Dashboardpage(driver);
-		mp=new Managepayeeorbeneficiarypage(driver);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
+		dp=new Dashboardpage();
+		mp=new Managepayeeorbeneficiarypage();
 		
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		hp.clickonnewuserlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='e-Banking System | User Login']"));
 		lp.entervalidemailid();
@@ -57,10 +58,10 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("3000");
 		tp.ClickonSubmitButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String confirmationtext = alt.getText();
 		Assert.assertEquals(confirmationtext, "Transaction Details has been updated","TC_108 Failed,Unable to transfer Amount to Payee");
 		alt.accept();
@@ -73,10 +74,10 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("80000");
 		tp.ClickonSubmitButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String confirmationtext = alt.getText();
 		Assert.assertEquals(confirmationtext, "Insufficient amount in account","TC_109 Failed,Amount to Payee Transferred Even when balance was insufficient");
 		alt.accept();
@@ -89,7 +90,7 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.ClickonSubmitButton();
 		String validationmessage = tp.getValidationMessageofAmountField();
 		Assert.assertEquals(validationmessage,"Please fill in this field.","TC110 Failed, Amount was Transferred to Payee Even when Amount in Amount Field was Empty");
@@ -103,7 +104,7 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("-500");
 		tp.ClickonSubmitButton();
 		String validationmessage = tp.getValidationMessageofAmountField();
@@ -117,7 +118,7 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("Five Hundred");
 		tp.ClickonSubmitButton();
 		String validationmessage = tp.getValidationMessageofAmountField();
@@ -131,10 +132,10 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("0");
 		tp.ClickonSubmitButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String confirmationtext = alt.getText();
 		Assert.assertEquals(confirmationtext,"Amount must be greater than zero","TC113 Failed, Amount was Transferred to Payee Even when Amount in Amount Field was 0");
 	}
@@ -146,9 +147,9 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("200");
-		driver.navigate().refresh();
+		DriverManager.getDriver().navigate().refresh();
 		wait.waitforElementToBeVisible(By.name("amount"));
 		String validationmessage = tp.getValuePresentinAmountField();
 		Assert.assertTrue(validationmessage.isEmpty(),"TC114 Failed,Values present in Fields were not refreshed");
@@ -161,7 +162,7 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("'1'='1");
 		tp.ClickonSubmitButton();
 		String validationmessage = tp.getValidationMessageofAmountField();
@@ -175,7 +176,7 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("9.234");
 		tp.ClickonSubmitButton();
 		String validationmessage = tp.getValidationMessageofAmountField();
@@ -189,10 +190,10 @@ public class TransferAmountPageTest extends TestBase{
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']/tbody/tr"));
 		mp.clickontransferbutton();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Transfer Amount']"));
-		tp=new TransferAmountpage(driver);
+		tp=new TransferAmountpage();
 		tp.EnterTransferAmount("1");
 		tp.ClickonSubmitButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String confirmationtext = alt.getText();
 		Assert.assertEquals(confirmationtext, "Transaction Details has been updated","TC_116 Failed,Unable to transfer minimum Amount value to Payee");
 		alt.accept();
@@ -202,7 +203,8 @@ public class TransferAmountPageTest extends TestBase{
 	@AfterMethod
 	public void Teardown()
 	{
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 	

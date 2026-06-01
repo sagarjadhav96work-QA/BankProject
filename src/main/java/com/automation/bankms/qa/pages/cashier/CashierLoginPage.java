@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
@@ -21,9 +22,9 @@ public class CashierLoginPage {
    WebDriver driver;
    WaitUtils wait;
    protected static final Logger log=LogManagerUtil.getLogger(CashierLoginPage.class);
-	public CashierLoginPage(WebDriver driver)
+	public CashierLoginPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);
 	}
 	
@@ -51,7 +52,7 @@ public class CashierLoginPage {
 	{
 		log.info("Clicking on Loginbutton");
 		driver.findElement(loginbutton).click();
-		return new CashierDashboardPage(driver);
+		return new CashierDashboardPage();
 		
 	}
 	
@@ -59,7 +60,7 @@ public class CashierLoginPage {
 	{
 		log.info("Clicking on Forgot password link");
 		driver.findElement(forgotpasswordlink).click();
-		return new  CashierForgotPasswordPage(driver);
+		return new  CashierForgotPasswordPage();
 		
 	}
 	
@@ -67,7 +68,7 @@ public class CashierLoginPage {
 	{
 		log.info("Clicking on Homepage link");
 		driver.findElement(homepagelink).click();
-		return new Homepage(driver);
+		return new Homepage();
 	}
 	
 	public void waitForVisibilityofCashierLoginPage()

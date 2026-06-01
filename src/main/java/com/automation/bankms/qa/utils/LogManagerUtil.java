@@ -12,6 +12,7 @@ public class LogManagerUtil {
 
 	public static Logger getLogger(Class<?> Clazz)
 	{
+		
 		return LoggerFactory.getLogger(Clazz);
 	}
 	

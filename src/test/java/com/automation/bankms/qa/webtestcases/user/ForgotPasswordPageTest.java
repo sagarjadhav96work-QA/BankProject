@@ -10,6 +10,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Forgotpasswordpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -31,17 +32,17 @@ public class ForgotPasswordPageTest extends TestBase {
 	{
 		
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
 		
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		soft=new SoftAssert();
 		hp.clickonnewuserlink();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='e-Banking System | User Login']"));
 		lp.clickonforgotpasswordlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='Forgot Password!']"));
-		fp=new Forgotpasswordpage(driver);
+		fp=new Forgotpasswordpage();
 		
 	}
 	
@@ -53,7 +54,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("Vikram@852");
 		fp.enterConfirmPassword("Vikram@852");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Your Password succesfully changed","TC227 Failed,Reset Password Failed");
 		alt.accept();
@@ -115,7 +116,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("Vikram@852");
 		fp.enterConfirmPassword("Vikram@852");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Email id or Mobile no is invalid","TC231 Failed,Password resetted with Incorrect Email Address");
 		alt.accept();
@@ -131,7 +132,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("Vikram@852");
 		fp.enterConfirmPassword("Vikram@852");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Email id or Mobile no is invalid","TC232 Failed,Password resetted with Incorrect Mobile Number");
 		alt.accept();
@@ -147,7 +148,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("Vikram@852");
 		fp.enterConfirmPassword("Vikram@85222");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "New Password and Confirm Password Field do not match  !!","TC233 Failed,Password resetted with Mismatch in New and Confirm Password");
 		alt.accept();
@@ -197,7 +198,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("  Sa g ar@  19  ");
 		fp.enterConfirmPassword("  Sa g ar@  19  ");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Your Password succesfully changed","Password reset failed with leading or trailing spaces in new and confirm password field");
 		alt.accept();
@@ -214,7 +215,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		lp.entervalidpasswordafterpasswordchange(TrimmedChangedPassword);
 		lp.clickonloginbutton();
 		
-		Alert alt1 = driver.switchTo().alert();
+		Alert alt1 = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext1 = alt1.getText();
 		soft.assertNotEquals(passwordchangealerttext1,"Invalid Details","TC236 Failed,DEFECT: Application did not trim spaces. Login failed with trimmed password");
 		alt1.accept();
@@ -232,7 +233,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("abcdefghijklmnopqrstuvwxyz12345678900987654321ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12345678900987654321ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		fp.enterConfirmPassword("abcdefghijklmnopqrstuvwxyz12345678900987654321ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12345678900987654321ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Your Password succesfully changed","TC237 Failed,Reset Password Failed,Long Input Not Handled Properly");
 		alt.accept();
@@ -250,7 +251,7 @@ public class ForgotPasswordPageTest extends TestBase {
 		fp.enterNewPassword("Vikram@852#");
 		fp.enterConfirmPassword("Vikram@852#");
 		fp.clickOnResetButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String resetpasswordalertmessage = alt.getText();
 		soft.assertEquals(resetpasswordalertmessage, "Your Password succesfully changed","TC238 Failed,Reset Password Failed,Special Characters not accepted in new and confirm password fields");
 		alt.accept();
@@ -298,7 +299,8 @@ public class ForgotPasswordPageTest extends TestBase {
 	@AfterMethod
 	public void Teardown()
 	{
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 	

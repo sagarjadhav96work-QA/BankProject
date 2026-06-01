@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -32,21 +33,21 @@ public class TransactionReportTest extends TestBase {
 	public void Setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver", driver);
-		wait=new WaitUtils(driver, 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		sort=new SortUtils();
-		hp=new Homepage(driver);
+		hp=new Homepage();
 		hp.clickonnewuserlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='e-Banking System | User Login']"));
-		lp=new Loginpage(driver);
+		lp=new Loginpage();
 		lp.entervalidemailid();
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBeVisible(By.xpath("//span[text()='Payee / Beneficiary']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonreportlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='Transaction Report']"));
-		tp=new TransactionReportpage(driver);
+		tp=new TransactionReportpage();
 		
 	}
 	
@@ -99,13 +100,13 @@ public class TransactionReportTest extends TestBase {
 		tp.ClickOnSubmitButton();
 		wait.waitforElementToBeVisible(By.xpath("//table[@id='dataTable']"));
 
-		int totalcolumns = driver.findElements(By.xpath("//table[@id='dataTable']/thead/tr/th")).size();
+		int totalcolumns = DriverManager.getDriver().findElements(By.xpath("//table[@id='dataTable']/thead/tr/th")).size();
 		Assert.assertEquals(totalcolumns,7,"Headers count is mismatched");
 		
 		String []nameofheaders= {"S.No","Transaction Number","Received/Sent Account No","Amount","Transaction Type","Status","Txn Date"};
 		for(int a=1;a<=totalcolumns;a++)
 		{
-			String tableheadertext = driver.findElement(By.xpath("//table[@id='dataTable']/thead/tr/th["+a+"]")).getText();
+			String tableheadertext = DriverManager.getDriver().findElement(By.xpath("//table[@id='dataTable']/thead/tr/th["+a+"]")).getText();
 		
 			Assert.assertEquals(tableheadertext, nameofheaders[a-1],"Headers mismatched at column "+a);
 			
@@ -552,7 +553,8 @@ public class TransactionReportTest extends TestBase {
 	@AfterMethod
 	public void Teardown()
 	{
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.WaitUtils;
 
 public class Managepayeeorbeneficiarypage {
@@ -29,9 +30,9 @@ public class Managepayeeorbeneficiarypage {
 	 WaitUtils utils;
 	 WebDriver driver;
 	
-	public Managepayeeorbeneficiarypage(WebDriver driver)
+	public Managepayeeorbeneficiarypage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 		utils=new WaitUtils(driver, 2000);
 	}
@@ -197,7 +198,7 @@ public class Managepayeeorbeneficiarypage {
 	public TransferAmountpage clickontransferbutton()
 	{
 		Transferbutton.click();
-		return new TransferAmountpage(driver);
+		return new TransferAmountpage();
 	}
 	
 	public void Searchpayee(String payeename)

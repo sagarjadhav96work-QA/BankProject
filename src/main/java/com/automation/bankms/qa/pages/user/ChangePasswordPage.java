@@ -1,9 +1,13 @@
 package com.automation.bankms.qa.pages.user;
 
+
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.automation.bankms.qa.driver.DriverManager;
 
 public class ChangePasswordPage  {
 
@@ -15,9 +19,9 @@ public class ChangePasswordPage  {
 	@FindBy(id="submit")private WebElement changebutton;
 	WebDriver driver;
 	
-	public ChangePasswordPage(WebDriver driver)
+	public ChangePasswordPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -44,7 +48,7 @@ public class ChangePasswordPage  {
 	public ChangePasswordPage clickOnChangeButton()
 	{
 		changebutton.click();
-		return new ChangePasswordPage(driver);
+		return new ChangePasswordPage();
 	}
 	
 	public String getValidationTextofCurrentPasswordInputField()

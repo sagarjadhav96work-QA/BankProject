@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.WaitUtils;
 
 public class TransactionReportpage  {
@@ -52,9 +53,9 @@ public class TransactionReportpage  {
 	WebDriver driver;
 	
 	
-	public TransactionReportpage(WebDriver driver)
+	public TransactionReportpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();;
 		PageFactory.initElements(driver,this);
 		wait=new WaitUtils(driver, 5000);
 		act=new Actions(driver);

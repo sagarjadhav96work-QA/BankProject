@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -32,12 +33,12 @@ public class UserProfileUpdateTest extends TestBase{
 	public void Setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
-		dp=new Dashboardpage(driver);
-		up=new UserProfileUpdatePage(driver);
-		wait=new WaitUtils(driver, 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
+		dp=new Dashboardpage();
+		up=new UserProfileUpdatePage();
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		soft=new SoftAssert();
 		commonutils=new CommonUtils();
 		hp.clickonnewuserlink();
@@ -65,7 +66,7 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String successconfirmationText = Alt.getText();
 		Alt.accept();
 		Assert.assertEquals(successconfirmationText,"Profile has been updated","TC167 Failed,User Profile Updation Failed ");
@@ -195,9 +196,9 @@ public class UserProfileUpdateTest extends TestBase{
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
 		
-		if(commonutils.checkIfAlertIsPresent(driver)==true)
+		if(commonutils.checkIfAlertIsPresent(DriverManager.getDriver())==true)
 		{
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertvalidationtext = alt.getText();
 			alt.accept();
 			Assert.fail("Alert Found "+alertvalidationtext+" TC177 Failed,User Profile was updated with Less than ten digits in Mobile Number field");
@@ -229,9 +230,9 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clickonUpdateButton();
 		
 
-		if(commonutils.checkIfAlertIsPresent(driver)==true)
+		if(commonutils.checkIfAlertIsPresent(DriverManager.getDriver())==true)
 		{
-			Alert alt = driver.switchTo().alert();
+			Alert alt = DriverManager.getDriver().switchTo().alert();
 			String alertvalidationtext = alt.getText();
 			alt.accept();
 			Assert.assertTrue(alertvalidationtext.contains("Profile has been updated"), "Profile Not Updated Successfully with more than 10 digits");
@@ -262,7 +263,7 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String successconfirmationText = Alt.getText();
 		Alt.accept();
 		Assert.assertEquals(successconfirmationText,"Profile has been updated","TC179 Failed,User Profile Updation Failed with one alphabet in First Name Field");
@@ -282,7 +283,7 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String successconfirmationText = Alt.getText();
 		Alt.accept();
 		Assert.assertFalse(successconfirmationText.contains("Profile has been updated"),"TC180 Failed,User Profile Updated with More than hundred alphabets in First Name Field");
@@ -303,7 +304,7 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String successconfirmationText = Alt.getText();
 		Alt.accept();
 		Assert.assertEquals(successconfirmationText,"Profile has been updated","TC181 Failed,User Profile Updation Failed with one alphabet in Last Name Field");
@@ -323,7 +324,7 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String successconfirmationText = Alt.getText();
 		Alt.accept();
 		Assert.assertFalse(successconfirmationText.contains("Profile has been updated"),"TC182 Failed,User Profile Updated with More than hundred alphabets in Last Name Field");
@@ -343,9 +344,9 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		if(commonutils.checkIfAlertIsPresent(driver)==true)
+		if(commonutils.checkIfAlertIsPresent(DriverManager.getDriver())==true)
 		{
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String alertconfirmationtext = Alt.getText();
 		Alt.accept();
 		if(alertconfirmationtext.contains("Profile has been updated")){
@@ -375,9 +376,9 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		if(commonutils.checkIfAlertIsPresent(driver)==true)
+		if(commonutils.checkIfAlertIsPresent(DriverManager.getDriver())==true)
 		{
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String alertconfirmationtext = Alt.getText();
 		Alt.accept();
 		if(alertconfirmationtext.contains("Profile has been updated")){
@@ -406,9 +407,9 @@ public class UserProfileUpdateTest extends TestBase{
 		up.clearUserMobileNumber();
 		up.enterMobileNumber(MobileNumber);
 		up.clickonUpdateButton();
-		if(commonutils.checkIfAlertIsPresent(driver)==true)
+		if(commonutils.checkIfAlertIsPresent(DriverManager.getDriver())==true)
 		{
-		Alert Alt = driver.switchTo().alert();
+		Alert Alt = DriverManager.getDriver().switchTo().alert();
 		String alertconfirmationtext = Alt.getText();
 		Alt.accept();
 		if(alertconfirmationtext.contains("Profile has been updated")){
@@ -427,7 +428,9 @@ public class UserProfileUpdateTest extends TestBase{
 	@AfterMethod
 	public void Teardown()
 	{
-		driver.quit();
+		
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 	
