@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.WaitUtils;
 
 public class Dashboardpage {
@@ -42,9 +43,9 @@ public class Dashboardpage {
     WaitUtils wait;
 	WebDriver driver;
 	
-	public Dashboardpage(WebDriver driver)
+	public Dashboardpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 		wait=new WaitUtils(driver, 20000);
 	}
@@ -63,7 +64,7 @@ public class Dashboardpage {
 	public Useraccountopeningpage clickonaccountopeninglink()
 	{
 		accountopeninglink.click();
-		return new Useraccountopeningpage(driver);
+		return new Useraccountopeningpage();
 	}
 	
 	public String checknewuseralert()
@@ -76,13 +77,13 @@ public class Dashboardpage {
 		logoutlink.click();
 		wait.waitforElementToBeClickable(By.xpath("(//a[@href='logout.php'])[2]"));
 		logoutconfirmationbutton.click();
-		return new Loginpage(driver);
+		return new Loginpage();
 	}
 	
 	public Dashboardpage clickondashboardlink()
 	{
 		dashboardlink.click();
-		return new Dashboardpage(driver);
+		return new Dashboardpage();
 		
 	}
 	
@@ -95,7 +96,7 @@ public class Dashboardpage {
 	public TransactionReportpage clickonreportlink()
 	{
 		reportlink.click();
-		return new TransactionReportpage(driver);
+		return new TransactionReportpage();
 	}
 	
 	public void clickonuserinfolink()
@@ -106,13 +107,13 @@ public class Dashboardpage {
 	public UserProfileUpdatePage clickonuserprofilelink()
 	{
 		userprofilelink.click();
-		return new UserProfileUpdatePage(driver);
+		return new UserProfileUpdatePage();
 	}
 	
 	public ChangePasswordPage clickonchangepasswordlink()
 	{
 		changepasswordlink.click();
-		return new ChangePasswordPage(driver);
+		return new ChangePasswordPage();
 	}
 	
 	public String getaccountopeningconfirmationtext()
@@ -126,7 +127,7 @@ public class Dashboardpage {
 		wait.waitforElementToBeClickable(By.xpath("//a[text()='Add']"));
 		
 		addpayeeorbeneficiarylink.click();
-		return new Addpayeeorbeneficiarypage(driver);
+		return new Addpayeeorbeneficiarypage();
 		
 	}
 	
@@ -135,7 +136,7 @@ public class Dashboardpage {
 		payeeorbeneficiarylink.click();
 		wait.waitforElementToBeClickable(By.xpath("//a[text()='Manage']"));
 		managepayeeorbeneficiarylink.click();
-		return new Managepayeeorbeneficiarypage(driver);
+		return new Managepayeeorbeneficiarypage();
 	}
 	
 	public String getNameofUserProfile()

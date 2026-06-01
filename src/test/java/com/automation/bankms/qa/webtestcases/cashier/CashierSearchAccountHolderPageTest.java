@@ -11,6 +11,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.cashier.CashierDashboardPage;
 import com.automation.bankms.qa.pages.cashier.CashierLoginPage;
 import com.automation.bankms.qa.pages.cashier.CashierSearchAccountHoldersPage;
@@ -33,25 +34,26 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 	
 	public SoftAssert soft;
 	
-	@BeforeMethod
+	
+	@BeforeMethod(alwaysRun = true)
 	public void Setup(Method method,ITestContext context)
 	{
 		
 		
 		log.info("========= STARTING TEST: {} =========", method.getName());
 		Initialization();
-		context.setAttribute("driver", driver);
+		context.setAttribute("driver", DriverManager.getDriver());
 		log.info("Initializing Assert");
 		soft=new SoftAssert();
 		log.info("Initializing Waits");
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		log.info("Initializing Window Utils");
-		window=new WindowUtils(driver);
-		hp=new Homepage(driver);
+		window=new WindowUtils(DriverManager.getDriver());
+		hp=new Homepage();
 		log.info("Clicking on Cashier Login Link");
 		hp.clickoncashierloginlink();
 		log.info("Navigating to Cashier Login Page");
-		clp=new CashierLoginPage(driver);
+		clp=new CashierLoginPage();
 		clp.waitForVisibilityofCashierLoginPage();
 		log.info("Cashier Login page is successfully loaded");
 		clp.enterEmployeeId(ConfigReader.getProperty("cashieremployeeid"));
@@ -61,16 +63,16 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
 		log.info("Navigating to Cashier Dashboard Page");
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		cdp.waitForLaunchOfDashboardPage();
 		cdp.clickOnSearchAccountHolderLink();
 		log.info("Clicked on Search Account Holder Link");
 		log.info("Navigating to Cashier Search Account Holder Page");
-		csahp=new CashierSearchAccountHoldersPage(driver);
+		csahp=new CashierSearchAccountHoldersPage();
 		
 	}
 	
-	@Test(priority=1)
+	@Test(priority=1,groups="regression",retryAnalyzer =com.automation.bankms.qa.retryanalyzer.RetryAnalyzer.class)
 	public void TC315_verifySearchUsingValidAccountHolderNameTest()
 	{
 		log.info("Checking Navigation of Search Account Holders Page");
@@ -97,7 +99,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=2)
+	@Test(priority=2,groups={"regression","functional","smoke"})
 	public void TC316_verifyPartialNameSearchTest()
 	{
 		log.info("Checking Navigation of Search Account Holders Page");
@@ -124,7 +126,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=3)
+	@Test(priority=3,groups={"functional","smoke"})
 	public void TC317_verifySearchwithAccountNumberTest()
 	{
 		log.info("Checking Navigation of Search Account Holders Page");
@@ -151,7 +153,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=4)
+	@Test(priority=4,groups={"regression"})
 	public void TC318_verifySearchwithMobileNumberTest()
 	{
 		log.info("Checking Navigation of Search Account Holders Page");
@@ -178,7 +180,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=5)
+	@Test(priority=5,groups={"regression","smoke"})
 	public void TC319_verifyTableDisplayAllRequiredColumnsTest()
 	{
 		log.info("Checking Navigation of Search Account Holders Page");
@@ -241,8 +243,8 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		}
 		else
 		{
-			String parentwindow = driver.getWindowHandle();
-			int currentwindowcount = driver.getWindowHandles().size();
+			String parentwindow = DriverManager.getDriver().getWindowHandle();
+			int currentwindowcount = DriverManager.getDriver().getWindowHandles().size();
 			csahp.checkpresenceofViewButton();
 			log.info("View Button is Present in Action Header Column");
 			csahp.clickOnViewButton();
@@ -251,7 +253,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 			wait.waitForNewWindowToOpen(currentwindowcount);
 			log.info("Switching to New Window");
 			window.switchToNewWindow();
-			cudp=new CashierUserDetailsPage(driver);
+			cudp=new CashierUserDetailsPage();
 			log.info("Navigating to Cashier User Details Page");
 			String titleofuserdetailspage = cudp.getTitleofUserDetailsPage();
 			soft.assertEquals(titleofuserdetailspage,"Details of User","TC 321 Failed,Cashier is not Navigated to User Details Page");
@@ -282,8 +284,8 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 		}
 		else
 		{
-			String parentwindow = driver.getWindowHandle();
-			int currentwindowcount = driver.getWindowHandles().size();
+			String parentwindow = DriverManager.getDriver().getWindowHandle();
+			int currentwindowcount = DriverManager.getDriver().getWindowHandles().size();
 			csahp.checkpresenceofTransactionHistoryButton();;
 			log.info("Transaction History Button is Present in Action Header Column");
 			csahp.clickOnTransactionHistoryButton();
@@ -292,7 +294,7 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 			wait.waitForNewWindowToOpen(currentwindowcount);
 			log.info("Switching to New Window");
 			window.switchToNewWindow();
-			cthp=new CashierTransactionHistoryPage(driver);
+			cthp=new CashierTransactionHistoryPage();
 			log.info("Navigating to Cashier Transaction History Page");
 			String titleoftransactionhistorypage = cthp.getTitleofTransactionHistoryPage();
 			soft.assertEquals(titleoftransactionhistorypage,"Transaction Details","TC 322 Failed,Cashier is not Navigated to User Transaction History Page");
@@ -611,11 +613,12 @@ public class CashierSearchAccountHolderPageTest extends TestBase {
 	
 	
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void Teardown(Method method)
 	{
 		log.info("Browser Closed");
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		log.info("========= ENDING TEST: {} =========", method.getName());
 	}
 	

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.ChangePasswordPage;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
@@ -30,12 +31,12 @@ public class ChangePasswordPageTest extends TestBase {
 	public void Setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver",driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
-		dp=new Dashboardpage(driver);
+		context.setAttribute("driver",DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
+		dp=new Dashboardpage();
 		
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		soft=new SoftAssert();
 		hp.clickonnewuserlink();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='e-Banking System | User Login']"));
@@ -48,7 +49,7 @@ public class ChangePasswordPageTest extends TestBase {
 	    wait.waitforElementToBeClickable(By.xpath("//a[@href='change-password.php']"));
 	    dp.clickonchangepasswordlink();
 	    wait.waitforElementToBeVisible(By.xpath("//h3[text()='Change Password']"));
-	    cpp=new ChangePasswordPage(driver);
+	    cpp=new ChangePasswordPage();
 		
 	
 				
@@ -63,7 +64,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(NewPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangeconfirmationtext = alt.getText();
 		soft.assertEquals(passwordchangeconfirmationtext,"Your password successfully changed","TC 203 Failed,Password not changed successfully");
 		soft.assertAll();
@@ -85,7 +86,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(NewPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangeconfirmationtext = alt.getText();
 		soft.assertEquals(passwordchangeconfirmationtext,"New Password is Same as Current Password","TC 204 Failed,No alert found,Password changed successfully");
 		alt.accept();
@@ -109,7 +110,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(ConfirmPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext = alt.getText();
 		soft.assertEquals(passwordchangealerttext,"New Password and Confirm Password field does not match","TC 205 Failed,No alert found,Password changed successfully");
 		alt.accept();
@@ -201,7 +202,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(ConfirmPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext = alt.getText();
 		soft.assertEquals(passwordchangealerttext,"New Password and Confirm Password field does not match","TC 209 Failed,No alert found,Password changed successfully");
 		alt.accept();
@@ -226,7 +227,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(ConfirmPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext = alt.getText();
 		soft.assertEquals(passwordchangealerttext,"Your current password is wrong","TC 210 Failed,No alert found,Password changed successfully with Wrong Password");
 		alt.accept();
@@ -278,7 +279,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(ConfirmPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext = alt.getText();
 		soft.assertEquals(passwordchangealerttext,"Invalid Input","TC 223 Failed,No error alert found,Password changed successfully with SQL Input");
 		alt.accept();
@@ -304,7 +305,7 @@ public class ChangePasswordPageTest extends TestBase {
 		cpp.enterNewPassword(NewPassword);
 		cpp.enterConfirmPassword(ConfirmPassword);
 		cpp.clickOnChangeButton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext = alt.getText();
 		soft.assertEquals(passwordchangealerttext,"Your password successfully changed","Password not changed successfully with leading or trailing spaces");
 		alt.accept();
@@ -319,7 +320,7 @@ public class ChangePasswordPageTest extends TestBase {
 		lp.entervalidpasswordafterpasswordchange(TrimmedChangedPassword);
 		lp.clickonloginbutton();
 		
-		Alert alt1 = driver.switchTo().alert();
+		Alert alt1 = DriverManager.getDriver().switchTo().alert();
 		String passwordchangealerttext1 = alt1.getText();
 		soft.assertNotEquals(passwordchangealerttext1,"Invalid Details","DEFECT: Application did not trim spaces. Login failed with trimmed password");
 		alt1.accept();
@@ -332,7 +333,8 @@ public class ChangePasswordPageTest extends TestBase {
 	@AfterMethod
 	public void Teardown()
 	{
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 	

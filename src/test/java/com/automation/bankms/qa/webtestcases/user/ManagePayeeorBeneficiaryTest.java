@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -32,11 +33,11 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
-		dp=new Dashboardpage(driver);
-		wait=new WaitUtils(driver, 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
+		dp=new Dashboardpage();
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		sort=new SortUtils();
 		hp.clickonnewuserlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='e-Banking System | User Login']"));
@@ -52,7 +53,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	{
 		
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		boolean verificationstatus = mp.checkworkingofsearchpage("870644954");
 		Assert.assertEquals(verificationstatus,true,"TC123_Failed,No such payee detail present");
 		
@@ -63,7 +64,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	{
 		
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvibilityofmanagepayeepagetitle();
 		mp.checkvibilityofmanagepayeepagetitle();
 		mp.checkvisibilityofsearchinputfield();
@@ -79,7 +80,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	{
 		
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonnameofpayeeheader();
 		ArrayList<String> listofpayee = mp.getpayeenames();
@@ -96,7 +97,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC126_checksortingofnameofpayeeindescendingordertest() throws InterruptedException
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonnameofpayeeheader();
 		mp.clickonnameofpayeeheader();
@@ -115,7 +116,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC127_checksortingofemailofpayeeinascendingordertest()
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonnameofpayeeheader();
 		ArrayList<String> listofpayeeemails = mp.getpayeeemail();
@@ -133,7 +134,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	{
 		
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonnameofpayeeheader();
 		mp.clickonnameofpayeeheader();
@@ -152,7 +153,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC129_checksortingofmobilenumberofpayeeinascendingordertest()
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonpayeesmobilenumberheader();
 		ArrayList<Long> listofmobilenumber = mp.getpayeemobilenumber();
@@ -168,7 +169,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC130_checksortingofmobilenumberofpayeeindescendingordertest()
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonpayeesmobilenumberheader();
 		mp.clickonpayeesmobilenumberheader();
@@ -185,7 +186,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC131_checksortingofaccountnumberofpayeeinascendingordertest()
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonpayeesaccountnumberheader();
 		ArrayList<Long> listofaccountnumber = mp.getpayeeaccountnumber();
@@ -201,7 +202,7 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	public void TC132_checksortingofaccountnumberofpayeeindescendingordertest()
 	{
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvisibilityoftableheader();
 		mp.clickonpayeesaccountnumberheader();
 		mp.clickonpayeesaccountnumberheader();
@@ -217,7 +218,8 @@ public class ManagePayeeorBeneficiaryTest extends TestBase {
 	@AfterMethod
 	public void teardown()
 	{
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		
 	}
 	

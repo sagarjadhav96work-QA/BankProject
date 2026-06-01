@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
 import com.automation.bankms.qa.pages.user.Homepage;
 import com.automation.bankms.qa.pages.user.Loginpage;
@@ -30,12 +31,12 @@ public class UserAccountOpeningTest extends TestBase {
 	public void setup(ITestContext context)
 	{
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		ut=new WaitUtils(driver, 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		ut=new WaitUtils(DriverManager.getDriver(), 20000);
 		hp.clickonnewuserlink();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='e-Banking System | User Login']"));
-		lp=new Loginpage(driver);
+		lp=new Loginpage();
 		
 	}
 	
@@ -46,10 +47,10 @@ public class UserAccountOpeningTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonaccountopeninglink();
 		ut.waitforElementToBeVisible(By.xpath("//h6[text()='Account Opening Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.selectaadharcardfromdropdown();
 		uaop.enteraddressproofnumber("181952729042");
 		uaop.uploadaddressproof(ConfigReader.getProperty("aadharpath"));
@@ -59,7 +60,7 @@ public class UserAccountOpeningTest extends TestBase {
 		uaop.selectdateofbirth("21-02-1990");
 		uaop.clickontermsandconditioncheckbox();
 		uaop.clickonaccountopeningsubmitbutton();
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String accountsubmissionverificationtext = alt.getText();
 		Assert.assertEquals(accountsubmissionverificationtext,"Details succesfully submitted.","TC050 failed,user is unable to send a new account opening request");
 		alt.accept();
@@ -73,10 +74,10 @@ public class UserAccountOpeningTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonaccountopeninglink();
 		ut.waitforElementToBeVisible(By.xpath("//h6[text()='Account Opening Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.clickonaccountopeningsubmitbutton();
 		
 		String validationtext = uaop.getAddressProofValidationMessage();
@@ -91,10 +92,10 @@ public class UserAccountOpeningTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonaccountopeninglink();
 		ut.waitforElementToBeVisible(By.xpath("//h6[text()='Account Opening Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.selectaadharcardfromdropdown();
 		uaop.enteraddressproofnumber("181952729042");
 		uaop.uploadaddressproof(ConfigReader.getProperty("unsupportedaadharpath"));
@@ -105,7 +106,7 @@ public class UserAccountOpeningTest extends TestBase {
 		uaop.clickontermsandconditioncheckbox();
 		uaop.clickonaccountopeningsubmitbutton();
 
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String verificationtext = alt.getText();
 		Assert.assertEquals(verificationtext,"Address Proof Image has Invalid format. Only jpg / jpeg/ png /gif / pdf format allowed","TC 052 Failed,user account opening request is sent");
 		alt.accept();
@@ -121,10 +122,10 @@ public class UserAccountOpeningTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonaccountopeninglink();
 		ut.waitforElementToBeVisible(By.xpath("//h6[text()='Account Opening Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.selectaadharcardfromdropdown();
 		uaop.enteraddressproofnumber("181952729042");
 		uaop.uploadaddressproof(ConfigReader.getProperty("aadharpath"));
@@ -135,7 +136,7 @@ public class UserAccountOpeningTest extends TestBase {
 		uaop.clickontermsandconditioncheckbox();
 		uaop.clickonaccountopeningsubmitbutton();
 		
-		Alert alt = driver.switchTo().alert();
+		Alert alt = DriverManager.getDriver().switchTo().alert();
 		String verificationtext = alt.getText();
 		Assert.assertEquals(verificationtext,"Pan Card Image has Invalid format. Only jpg / jpeg/ png /gif / pdf format allowed","TC 053 Failed,user account opening request is sent");
 		alt.accept();
@@ -150,10 +151,10 @@ public class UserAccountOpeningTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		ut.waitforElementToBeVisible(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		dp.clickonaccountopeninglink();
 		ut.waitforElementToBeVisible(By.xpath("//h6[text()='Account Opening Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.selectaadharcardfromdropdown();
 		uaop.enteraddressproofnumber("181952729042");
 		uaop.uploadaddressproof(ConfigReader.getProperty("aadharpath"));
@@ -162,10 +163,10 @@ public class UserAccountOpeningTest extends TestBase {
 		uaop.enteraddress("Mumbai");
 		uaop.selectdateofbirth("21-02-1990");
 		uaop.clickontermsandconditioncheckbox();
-		driver.navigate().refresh();
-		uaop = new Useraccountopeningpage(driver); 
+		DriverManager.getDriver().navigate().refresh();
+		uaop = new Useraccountopeningpage(); 
 		ut.waitforElementToBeVisible(By.id("addpidnum"));
-		String extractedtext = driver.findElement(By.id("addpidnum")).getAttribute("value");
+		String extractedtext = DriverManager.getDriver().findElement(By.id("addpidnum")).getAttribute("value");
 		Assert.assertTrue(extractedtext.isEmpty(),"TC075 failed,field is not empty after refresh");
 		
 		
@@ -179,7 +180,9 @@ public class UserAccountOpeningTest extends TestBase {
 	@AfterMethod
 	public void teardown()
 	{
-		driver.quit();
+		
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 	}
 	
 	

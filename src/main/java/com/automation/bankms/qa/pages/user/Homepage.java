@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.admin.Adminloginpage;
 import com.automation.bankms.qa.pages.cashier.CashierLoginPage;
 
@@ -27,9 +28,9 @@ public class Homepage  {
 	WaitUtils wait;
 	protected static final Logger log=LogManagerUtil.getLogger(Homepage.class);
     
-    public Homepage(WebDriver driver)
+    public Homepage()
     {
-    	this.driver=driver;
+    	driver=DriverManager.getDriver();
     	PageFactory.initElements(driver, this);
     	
     	wait=new WaitUtils(driver, 20000);
@@ -38,19 +39,19 @@ public class Homepage  {
     public Loginpage clickonnewuserlink()
     {
     	newuserlink.click();
-    	return new Loginpage(driver);
+    	return new Loginpage();
     }
     
     public CashierLoginPage clickoncashierloginlink()
     {
     	cashierloginlink.click();
-    	return new CashierLoginPage(driver);
+    	return new CashierLoginPage();
     }
     
     public Adminloginpage clickonadminloginlink()
     {
     	adminloginlink.click();
-    	return new Adminloginpage(driver);
+    	return new Adminloginpage();
     }
     
     public String getTitleofHomepage()

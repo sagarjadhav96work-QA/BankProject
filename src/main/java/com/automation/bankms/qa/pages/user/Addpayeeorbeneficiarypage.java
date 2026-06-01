@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class Addpayeeorbeneficiarypage {
 	
 	@FindBy(xpath="//h3[text()='Add Payee / beneficiary']")private WebElement Addpayeeorbeneficiarypagetitle;
@@ -15,9 +17,9 @@ public class Addpayeeorbeneficiarypage {
 	@FindBy(xpath="//div[contains(text(),'payee/beneficiary.')]")private WebElement openingrequestunapprovedtext;
 	WebDriver driver;
 	
-	public Addpayeeorbeneficiarypage(WebDriver driver)
+	public Addpayeeorbeneficiarypage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 	}
 	
@@ -39,7 +41,7 @@ public class Addpayeeorbeneficiarypage {
 	public Managepayeeorbeneficiarypage clickonaddpayeeorbeneficiarysubmitbutton()
 	{
 		Addpayeeorbeneficiarysubmitbutton.click();
-		return new Managepayeeorbeneficiarypage(driver);
+		return new Managepayeeorbeneficiarypage();
 	}
 	
 	public String getaccountnumbervalidationmessage()

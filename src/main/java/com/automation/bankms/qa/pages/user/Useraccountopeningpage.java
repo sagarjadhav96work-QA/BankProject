@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class Useraccountopeningpage {
 
 	WebDriver driver;
@@ -24,9 +26,9 @@ public class Useraccountopeningpage {
 	
 	
 	
-	public Useraccountopeningpage(WebDriver driver)
+	public Useraccountopeningpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 	}
 	

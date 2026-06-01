@@ -13,4 +13,8 @@ public class ExtentTestManager {
     public static void setTest(ExtentTest extentTest) {
         test.set(extentTest);
     }
+    
+    public static void unload() {
+        test.remove();
+    }
 }

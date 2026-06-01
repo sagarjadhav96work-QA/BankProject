@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.testng.asserts.SoftAssert;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
 
@@ -32,9 +33,9 @@ public class CashierDashboardPage {
    WaitUtils wait;
    SoftAssert soft;
 	
-	public CashierDashboardPage(WebDriver driver)
+	public CashierDashboardPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);
 		soft=new SoftAssert();
 	}
@@ -51,7 +52,7 @@ public class CashierDashboardPage {
 		log.info("Clicking on Account Holders Link");
 		driver.findElement(accountholderslink).click();
 		log.info("navigating to account holders page");
-		return new CashierAccountHoldersPage(driver);
+		return new CashierAccountHoldersPage();
 	}
 	
 	public CashierDashboardPage clickOnDashboardLink()
@@ -59,7 +60,7 @@ public class CashierDashboardPage {
 		log.info("Clicking on Dashboard Link");
 		driver.findElement(dashboardlink).click();
 		log.info("navigating to Dashboard page");
-		return new CashierDashboardPage(driver);
+		return new CashierDashboardPage();
 	}
 	
 	public void waitForLaunchOfDashboardPage()
@@ -99,7 +100,7 @@ public class CashierDashboardPage {
 		log.info("Clicking on Search Account Holder Link");
 		driver.findElement(searchaccountlink).click();
 		log.info("navigating to Search Account Holder page");
-		return new CashierSearchAccountHoldersPage(driver);
+		return new CashierSearchAccountHoldersPage();
 	}
 	
 }

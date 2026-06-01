@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.testng.asserts.SoftAssert;
 
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.WaitUtils;
 
@@ -50,9 +51,9 @@ public class CashierAccountHoldersPage {
 	WaitUtils wait;
 	
 	
-	public CashierAccountHoldersPage(WebDriver driver)
+	public CashierAccountHoldersPage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		wait=new WaitUtils(driver, 20000);
 		soft=new SoftAssert();
 	}

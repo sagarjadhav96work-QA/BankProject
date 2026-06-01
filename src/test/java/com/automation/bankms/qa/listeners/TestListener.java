@@ -52,5 +52,6 @@ public class TestListener implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         extent.flush(); // VERY IMPORTANT
+        ExtentTestManager.unload();
     }
 }

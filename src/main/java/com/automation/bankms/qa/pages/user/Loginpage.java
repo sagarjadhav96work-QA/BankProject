@@ -1,11 +1,13 @@
 package com.automation.bankms.qa.pages.user;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 
 
 public class Loginpage {
@@ -21,9 +23,9 @@ public class Loginpage {
 	
 	WebDriver driver;
 	
-	public Loginpage(WebDriver driver)
+	public Loginpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -85,7 +87,7 @@ public class Loginpage {
 		//ElementActions.click(loginbutton);
 		loginbutton.click();
 		
-		return new Dashboardpage(driver);
+		return new Dashboardpage();
 		
 	}
 	
@@ -116,13 +118,13 @@ public class Loginpage {
 	{
 		//ElementActions.click(forgotpasswordlink);
 		forgotpasswordlink.click();
-		return new Forgotpasswordpage(driver);
+		return new Forgotpasswordpage();
 	}
 	
 	
 	public Registrationpage clickoncreateanaccountlink()
 	{
-		return new Registrationpage(driver);
+		return new Registrationpage();
 		
 	}
 	

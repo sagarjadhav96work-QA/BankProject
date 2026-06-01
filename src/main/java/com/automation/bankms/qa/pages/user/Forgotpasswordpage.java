@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class Forgotpasswordpage  {
 	
 	@FindBy(xpath="//h1[text()='Forgot Password!']")private WebElement forgotpasswordpagetitle;
@@ -17,9 +19,9 @@ public class Forgotpasswordpage  {
 	@FindBy(xpath="//a[text()='Back to Home Page']")private WebElement backtohomepagelink;
 	WebDriver driver;
 	
-	public Forgotpasswordpage(WebDriver driver)
+	public Forgotpasswordpage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 	}
 	
@@ -51,19 +53,19 @@ public class Forgotpasswordpage  {
 	public Forgotpasswordpage clickOnResetButton()
 	{
 		resetbutton.click();
-		return new Forgotpasswordpage(driver);
+		return new Forgotpasswordpage();
 	}
 	
 	public Forgotpasswordpage clickOnForgotPasswordLink()
 	{
 		forgotpasswordlink.click();
-		return new Forgotpasswordpage(driver);
+		return new Forgotpasswordpage();
 	}
 	
 	public Homepage clickOnBackToHomePageLink()
 	{
 		backtohomepagelink.click();
-		return new Homepage(driver);
+		return new Homepage();
 	}
 	
 	public String getValidationMessageofEmailAddressInputField()

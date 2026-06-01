@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.automation.bankms.qa.driver.DriverManager;
+
 public class UserProfileUpdatePage  {
 	
 	@FindBy(xpath="//h1[text()='Profile']")private WebElement profileUpdatePageTitle;
@@ -17,9 +19,9 @@ public class UserProfileUpdatePage  {
 	
 	WebDriver driver;
 	
-	public UserProfileUpdatePage(WebDriver driver)
+	public UserProfileUpdatePage()
 	{
-		this.driver=driver;
+		driver=DriverManager.getDriver();
 		PageFactory.initElements(driver,this);
 	}
 	

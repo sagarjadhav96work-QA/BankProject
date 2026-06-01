@@ -13,6 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
 import com.automation.bankms.qa.config.ConfigReader;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.cashier.CashierAccountHoldersPage;
 import com.automation.bankms.qa.pages.cashier.CashierDashboardPage;
 import com.automation.bankms.qa.pages.cashier.CashierLoginPage;
@@ -39,17 +40,17 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	{
 		log.info("========= STARTING TEST: {} =========", method.getName());
 		Initialization();
-		context.setAttribute("driver", driver);
+		context.setAttribute("driver", DriverManager.getDriver());
 		log.info("Initializing Assert");
 		soft=new SoftAssert();
 		log.info("Initializing Waits");
-		wait=new WaitUtils(driver, 20000);
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		sort=new SortUtils();
-		hp=new Homepage(driver);
+		hp=new Homepage();
 		log.info("Clicking on Cashier Login Link");
 		hp.clickoncashierloginlink();
 		log.info("Navigating to Cashier Login Page");
-		clp=new CashierLoginPage(driver);
+		clp=new CashierLoginPage();
 		clp.waitForVisibilityofCashierLoginPage();
 		log.info("Cashier Login page is successfully loaded");
 		clp.enterEmployeeId(ConfigReader.getProperty("cashieremployeeid"));
@@ -59,7 +60,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		clp.clickOnLoginbutton();
 		log.info("Clicked on Login Button");
 		log.info("Navigating to Cashier Dashboard Page");
-		cdp=new CashierDashboardPage(driver);
+		cdp=new CashierDashboardPage();
 		cdp.waitForLaunchOfDashboardPage();
 		log.info("Clicking on Account Holders Link");
 		cdp.clickOnAccountHoldersLink();
@@ -72,7 +73,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC295_verifyNavigationofApprovedAccountHoldersPageTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -85,7 +86,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC297_verifyBehaviourofShowEntriesDropdownOnApprovedAccountHoldersPageTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -104,7 +105,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298A_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithNameTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -125,7 +126,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298B_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithMobileNumberTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -146,7 +147,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298C_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithEmailAddressTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -167,7 +168,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298D_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithAccountNumberTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -189,7 +190,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298E_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithAccountUserIDNumberTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -210,7 +211,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298F_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithStatusTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -231,7 +232,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC298G_verifyBehaviourofSearchBoxInputFieldonAccountHoldersPagewithActionTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -252,7 +253,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC299_verifyPaginationofAccountHoldersPageTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -273,7 +274,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC300A_verifyBehaviourofAccountHoldersPageTableAfterSortingNameinAscendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -303,7 +304,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC300B_verifyBehaviourofAccountHoldersPageTableAfterSortingMobileNumberinAscendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -333,7 +334,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC300C_verifyBehaviourofAccountHoldersPageTableAfterSortingEmailinAscendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -364,7 +365,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC300D_verifyBehaviourofAccountHoldersPageTableAfterSortingAccountNumberinAscendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -395,14 +396,14 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC300E_verifyBehaviourofAccountHoldersPageTableAfterSortingUserIDinAscendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
 		log.info("Account Holders Page Table is loaded successfully");
 		soft.assertTrue(accountholderspagetablestatus, "Approved Account Holder page table is not loaded successfully");
 		log.info("Clicking on UserID Header");
-		cahp.clickonAccountUserIDNumberHeader();;
+		cahp.clickonAccountUserIDNumberHeader();
 		log.info("Clicked on UserID Header");
 		log.info("Collecting list of UserID from all account holders");
 		
@@ -426,7 +427,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC301A_verifyBehaviourofAccountHoldersPageTableAfterSortingNameinDescendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -456,7 +457,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC301B_verifyBehaviourofAccountHoldersPageTableAfterSortingMobileNumberinDescendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -486,7 +487,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC301C_verifyBehaviourofAccountHoldersPageTableAfterSortingEmailinDescendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -517,7 +518,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC301D_verifyBehaviourofAccountHoldersPageTableAfterSortingAccountNumberinDescendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -548,14 +549,14 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC301E_verifyBehaviourofAccountHoldersPageTableAfterSortingUserIDinDescendingOrderTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
 		log.info("Account Holders Page Table is loaded successfully");
 		soft.assertTrue(accountholderspagetablestatus, "Approved Account Holder page table is not loaded successfully");
 		log.info("Double Clicking on UserID Header");
-		cahp.doubleClickonAccountUserIDNumberHeader();;
+		cahp.doubleClickonAccountUserIDNumberHeader();
 		log.info("Double Clicked on UserID Header");
 		log.info("Collecting list of UserID from all account holders");
 		
@@ -579,7 +580,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC302_verifyBehaviourofSQLInjectioninSearchBoxInputFieldofAccountHoldersPageTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -600,7 +601,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC303_verifyPaginationonLastPageofAccountHoldersTableTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -619,7 +620,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC304_verifyPaginationonResetAfterChangingEntriesonAccountHoldersTableTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -651,7 +652,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void TC307_verifyBehaviourofSearchBoxFieldofAccountHoldersPagewithSpecialCharactersInputTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -668,11 +669,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=24)
+	@Test(priority=25)
 	public void TC308_verifyBehaviourofSearchBoxFieldofAccountHoldersPagewithLongInputStringTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -689,11 +690,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=25)
+	@Test(priority=26)
 	public void TC309_verifyBehaviourofSearchBoxFieldofAccountHoldersPagewithEmptyInputStringTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -711,11 +712,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=26)
+	@Test(priority=27)
 	public void TC310_verifySortingAfterPaginationinAccountHoldersPageTableTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -751,11 +752,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=27)
+	@Test(priority=28)
 	public void TC311_verifyChangeinEntriesafterPageRefreshinAccountHoldersPageTableTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -778,11 +779,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		soft.assertAll();
 	}
 	
-	@Test(priority=28)
+	@Test(priority=29)
 	public void TC312_verifyFunctionalityofViewButtonTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -798,7 +799,7 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		log.info("Clicking On View Button");
 		cahp.clickOnViewButton();
 		log.info("Navigating to Cashier User Details Page");
-		cudp=new CashierUserDetailsPage(driver);
+		cudp=new CashierUserDetailsPage();
 		log.info("Checking Title of User Details Page");
 		soft.assertEquals(cudp.getTitleofUserDetailsPage(),"Details of User","TC 312 Failed,View Button is not Working,user was not Redirected to User Details Page");
 		
@@ -807,11 +808,11 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	}
 	
 	
-	@Test(priority=29)
+	@Test(priority=30)
 	public void TC313_verifyBackNavigationFromViewPageTest()
 	{
 		log.info("Navigating to Approved account holders page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Approved Account Holders Page is Navigated Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus = cahp.checkAccountHoldersPageTableisLoaded();
@@ -827,13 +828,13 @@ public class CashierAccountHoldersPageTest extends TestBase {
 		log.info("Clicking On View Button");
 		cahp.clickOnViewButton();
 		log.info("Navigating to Cashier User Details Page");
-		cudp=new CashierUserDetailsPage(driver);
+		cudp=new CashierUserDetailsPage();
 		log.info("Checking Title of User Details Page");
 		soft.assertEquals(cudp.getTitleofUserDetailsPage(),"Details of User","View Button is not Working,user was not Redirected to User Details Page");
 		log.info("Clicking on Back Button of Browser");
 		cudp.clickOnBackButton();
 		log.info("Navigating back to Cashier Account Holders Page");
-		cahp=new CashierAccountHoldersPage(driver);
+		cahp=new CashierAccountHoldersPage();
 		log.info("Checking Cashier is Redirected to Account Holders Page Successfully");
 		cahp.checkLaunchofAccountHolderspage();
 		boolean accountholderspagetablestatus1 = cahp.checkAccountHoldersPageTableisLoaded();
@@ -850,7 +851,8 @@ public class CashierAccountHoldersPageTest extends TestBase {
 	public void Teardown(Method method)
 	{
 		log.info("Browser Closed");
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		log.info("========= ENDING TEST: {} =========", method.getName());
 	}
 	

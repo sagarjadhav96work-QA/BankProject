@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.automation.bankms.qa.base.TestBase;
+import com.automation.bankms.qa.driver.DriverManager;
 import com.automation.bankms.qa.pages.user.Addpayeeorbeneficiarypage;
 import com.automation.bankms.qa.pages.user.ChangePasswordPage;
 import com.automation.bankms.qa.pages.user.Dashboardpage;
@@ -49,10 +50,10 @@ public class DashboardPageTest extends TestBase {
 		log.info("========= STARTING TEST: {} =========", method.getName());
 		
 		Initialization();
-		context.setAttribute("driver", driver);
-		hp=new Homepage(driver);
-		lp=new Loginpage(driver);
-		wait=new WaitUtils(driver, 20000);
+		context.setAttribute("driver", DriverManager.getDriver());
+		hp=new Homepage();
+		lp=new Loginpage();
+		wait=new WaitUtils(DriverManager.getDriver(), 20000);
 		soft=new SoftAssert();
 		
 		hp.clickonnewuserlink();
@@ -70,7 +71,7 @@ public class DashboardPageTest extends TestBase {
 		log.info("Entered Valid Password");
 		lp.clickonloginbutton();
 		log.info("Clicked on Login Button");
-        dp=new Dashboardpage(driver);
+        dp=new Dashboardpage();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
 		String dashboardpagetitle = dp.verifyvisibilityofdashboardpagetitle();
 		soft.assertEquals(dashboardpagetitle,"Dashboard","Dashboard page title not present on dashboard page");
@@ -104,7 +105,7 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpasswordwithaccountnotopened();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		String dashboardpagetitle = dp.verifyvisibilityofdashboardpagetitle();
 		soft.assertEquals(dashboardpagetitle,"Dashboard","Dashboard page title not present on dashboard page");
 		String userprofilename = dp.getNameofUserProfile();
@@ -124,7 +125,7 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickondashboardlink();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
@@ -140,11 +141,11 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickonaccountopeninglink();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Account Details']"));
-		uaop=new Useraccountopeningpage(driver);
+		uaop=new Useraccountopeningpage();
 		uaop.getAccountDetailsTitleText();
 		soft.assertEquals(uaop.getAccountDetailsTitleText(),"Account Details","TC 193 Failed,Account Opening Link not Working Properly");
 		soft.assertAll();
@@ -158,17 +159,17 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		
 		dp.clickonaddpayeeorbenefeciarylink();
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Add Payee / beneficiary']"));
-		ap=new Addpayeeorbeneficiarypage(driver);
+		ap=new Addpayeeorbeneficiarypage();
 		soft.assertEquals(ap.getAddPayeeorBeneficiaryTitletext(),"Add Payee / beneficiary","TC 194 Failed,Add Payee or Beneficiary Link not Working Properly");
 		
 		
 		dp.clickonmanagepayeeorbenefeciarylink();
-		mp=new Managepayeeorbeneficiarypage(driver);
+		mp=new Managepayeeorbeneficiarypage();
 		mp.checkvibilityofmanagepayeepagetitle();
 		soft.assertEquals(mp.gettextofmanagepayeepagetitle(),"Manage Payee","TC 194 Failed,Manage Payee or Beneficiary Link not Working Properly");
 		soft.assertAll();
@@ -182,11 +183,11 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickontransactionhistorylink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='Transaction History']"));
-		thp=new TransactionHistorypage(driver);
+		thp=new TransactionHistorypage();
 		soft.assertEquals(thp.getTitleofTransactionHistoryPage(),"Transaction History","TC 195 Failed,Transaction History Link not Working Properly");
 		soft.assertAll();
 		
@@ -201,11 +202,11 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickonreportlink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='Transaction Report']"));
-		trp=new TransactionReportpage(driver);
+		trp=new TransactionReportpage();
 		soft.assertEquals(trp.getTransactionReportPageTitle(),"Transaction Report","TC 196 Failed,Report Link not Working Properly");
 		soft.assertAll();
 		
@@ -220,13 +221,13 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickonuserinfolink();
 		wait.waitforElementToBeClickable(By.xpath("//a[@href='profile.php']"));
 		dp.clickonuserprofilelink();
 		wait.waitforElementToBeVisible(By.xpath("//h1[text()='Profile']"));
-		upup=new UserProfileUpdatePage(driver);
+		upup=new UserProfileUpdatePage();
 		soft.assertEquals(upup.getProfileUpdatePageTitle(),"Profile","TC 197 Failed,User Profile Link not Working Properly");
 		soft.assertAll();
 		
@@ -241,14 +242,14 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickonuserinfolink();
 		wait.waitforElementToBeClickable(By.xpath("//a[@href='change-password.php']"));
 		dp.clickonchangepasswordlink();
 		
 		wait.waitforElementToBeVisible(By.xpath("//h3[text()='Change Password']"));
-		cpp=new ChangePasswordPage(driver);
+		cpp=new ChangePasswordPage();
 		soft.assertEquals(cpp.getTitleTextofChangePasswordPage(),"Change Password","TC 198 Failed,Change Password link not Working Properly");
 		soft.assertAll();
 		
@@ -263,7 +264,7 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		soft.assertTrue(dp.checkSidePanelLinksareEnabled(),"Links in side panel are not present on dashboard");
 		dp.clickonuserinfolink();
 		wait.waitforElementToBeClickable(By.xpath("(//a[@href='logout.php'])[1]"));
@@ -285,7 +286,7 @@ public class DashboardPageTest extends TestBase {
 		lp.entervalidpassword();
 		lp.clickonloginbutton();
 		wait.waitforElementToBePresent(By.xpath("//h1[text()='Dashboard']"));
-		dp=new Dashboardpage(driver);
+		dp=new Dashboardpage();
 		String dashboardpagetitle = dp.verifyvisibilityofdashboardpagetitle();
 		soft.assertEquals(dashboardpagetitle,"Dashboard","Dashboard page title not present on dashboard page");
 		soft.assertTrue(dp.checkRecentTransactionTableHeaderareVisible(),"TC 200 Failed,Transaction Table Headers are not Shown correctly");
@@ -299,7 +300,8 @@ public class DashboardPageTest extends TestBase {
 	{
 		
 		log.info("Browser Closed");
-		driver.quit();
+		DriverManager.getDriver().quit();
+		DriverManager.unload();
 		log.info("========= ENDING TEST: {} =========", method.getName());
 	}
 	
