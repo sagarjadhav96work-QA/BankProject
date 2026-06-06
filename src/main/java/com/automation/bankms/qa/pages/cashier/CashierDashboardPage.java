@@ -103,4 +103,18 @@ public class CashierDashboardPage {
 		return new CashierSearchAccountHoldersPage();
 	}
 	
+	public void clickonUserProfileName()
+	{
+		log.info("Clicking on Username Dropdown");
+		driver.findElement(usernamedropdown).click();
+	}
+	
+	public CashierChangePasswordPage clickonChangePasswordLink()
+	{
+		wait.waitforElementToBeClickable(changepasswordlink);
+		log.info("Clicking on Change Password Link");
+		driver.findElement(changepasswordlink).click();
+		return new CashierChangePasswordPage();
+	}
+	
 }

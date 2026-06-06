@@ -23,13 +23,13 @@ import com.automation.bankms.qa.utils.LogManagerUtil;
 import com.automation.bankms.qa.utils.SortUtils;
 import com.automation.bankms.qa.utils.WaitUtils;
 
-public class CashierAccountHoldersPageTest extends TestBase {
+public class CashierApprovedAccountHoldersPageTest extends TestBase {
 	public Homepage hp;
 	public CashierLoginPage clp;
 	public CashierDashboardPage cdp;
 	public CashierAccountHoldersPage cahp;
 	public CashierUserDetailsPage cudp;
-	protected static final Logger log=LogManagerUtil.getLogger(CashierAccountHoldersPageTest.class);
+	protected static final Logger log=LogManagerUtil.getLogger(CashierApprovedAccountHoldersPageTest.class);
 	public SoftAssert soft;
 	public WaitUtils wait;
 	public SortUtils sort;
